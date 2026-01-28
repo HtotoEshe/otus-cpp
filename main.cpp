@@ -12,11 +12,11 @@
 // ("11.", '.') -> ["11", ""]
 // (".11", '.') -> ["", "11"]
 // ("11.22", '.') -> ["11", "22"]
-using spt_ip = std::vector<std::string>;
-using ip_pool_t = std::vector<spt_ip>;
+using str_ip_t = std::vector<std::string>;
+using ip_pool_t = std::vector<str_ip_t>;
 
-spt_ip split(const std::string& str, char d) {
-    spt_ip r;
+str_ip_t split(const std::string& str, char d) {
+    str_ip_t r;
 
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
@@ -32,7 +32,7 @@ spt_ip split(const std::string& str, char d) {
     return r;
 }
 
-// void filter(const spt_ip& ip, int one = -1, int two = -1, int three = -1,
+// void filter(const str_ip_t& ip, int one = -1, int two = -1, int three = -1,
 //             int four = -1) {
 //     bool got_it = false;
 //     if ((one != -1 && std::stoi(ip[0])) == one ||
@@ -49,6 +49,46 @@ spt_ip split(const std::string& str, char d) {
 //     std::cout << std::endl;
 // }
 
+template <typename T>
+void filter_s(str_ip_t ip, T t, bool& res) {
+    if (ip.empty()) {
+        return;
+    }
+    res &= (t == ip[0]);
+}
+
+template <typename T>
+void filter(str_ip_t ip, bool& res, T first) {
+    filter_s(ip, first, res);
+}
+
+template <typename T, typename... Args>
+void filter(str_ip_t ip, bool& res, T first, Args... args) {
+    filter_s(ip, first, res);
+    ip.erase(ip.begin());
+    filter(ip, res, args...);
+}
+
+void print_ip(const str_ip_t& ip) {
+    for (const auto& ip_part : ip) {
+        std::cout << ip_part;
+        if (ip_part != ip.back()) {
+            std::cout << ".";
+        }
+    }
+    std::cout << std::endl;
+}
+
+template <typename T>
+bool filter_any(const str_ip_t& ip, T byte) {
+    for (const auto& ip_part : ip) {
+        if (ip_part == byte) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
     try {
         ip_pool_t ip_pool;
@@ -61,7 +101,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
         auto compare = [](const std::vector<std::string>& a,
                           const std::vector<std::string>& b) {
             assert(a.size() == 4 && b.size() == 4);
-            auto GetWeight = [](const spt_ip& addr) {
+            auto GetWeight = [](const str_ip_t& addr) {
                 uint64_t res = (std::stoul(addr[0]) << 24) +
                                (std::stoul(addr[1]) << 16) +
                                (std::stoul(addr[2]) << 8) + std::stoul(addr[3]);
@@ -77,13 +117,27 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
         std::sort(ip_pool.begin(), ip_pool.end(), compare);
 
         for (const auto& ip : ip_pool) {
-            for (const auto& ip_part : ip) {
-                std::cout << ip_part;
-                if (ip_part != ip.back()) {
-                    std::cout << ".";
-                }
+            print_ip(ip);
+        }
+        for (const auto& ip : ip_pool) {
+            bool res = true;
+            filter(ip, res, "1");
+            if (res) {
+                print_ip(ip);
             }
-            std::cout << std::endl;
+        }
+        for (const auto& ip : ip_pool) {
+            bool res = true;
+            filter(ip, res, "46", "70");
+            if (res) {
+                print_ip(ip);
+            }
+        }
+
+        for (const auto& ip : ip_pool) {
+            if (filter_any(ip, "46")) {
+                print_ip(ip);
+            }
         }
 
         // 222.173.235.246

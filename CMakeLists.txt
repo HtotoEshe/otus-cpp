@@ -5,32 +5,32 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
 project(helloworld VERSION ${PROJECT_VESRION})
 
-option(WITH_BOOST_TEST "Whether to build Boost test" ON)
+option(WITH_BOOST_TEST "Whether to build Boost test" OFF)
 
 configure_file(version.h.in version.h)
 
 add_executable(lesson2 main.cpp)
-add_library(helloworld lib.cpp)
+# add_library(helloworld lib.cpp)
 
-set_target_properties(lesson2 helloworld PROPERTIES
+set_target_properties(lesson2 PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
 
-target_include_directories(helloworld
-    PRIVATE "${CMAKE_BINARY_DIR}"
-)
+# target_include_directories(helloworld
+#     PRIVATE "${CMAKE_BINARY_DIR}"
+# )
 
-target_link_libraries(lesson2 PRIVATE
-    helloworld
-)
+# target_link_libraries(lesson2 PRIVATE
+#     helloworld
+# )
 
 if(WITH_BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(test_version test_version.cpp)
 
     set_target_properties(test_version PROPERTIES
-        CXX_STANDARD 14
+        CXX_STANDARD 20
         CXX_STANDARD_REQUIRED ON
     )
 
@@ -39,19 +39,19 @@ if(WITH_BOOST_TEST)
         INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
     )
 
-    target_link_libraries(test_version
-        ${Boost_LIBRARIES}
-        helloworld
-    )
+    # target_link_libraries(test_version
+    #     ${Boost_LIBRARIES}
+    #     helloworld
+    # )
 endif()
 
 if (MSVC)
     target_compile_options(lesson2 PRIVATE
         /W4
     )
-    target_compile_options(helloworld PRIVATE
-        /W4
-    )
+    # target_compile_options(helloworld PRIVATE
+    #     /W4
+    # )
     if(WITH_BOOST_TEST)
         target_compile_options(test_version PRIVATE
             /W4
@@ -61,9 +61,9 @@ else ()
     target_compile_options(lesson2 PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-    target_compile_options(helloworld PRIVATE
-        -Wall -Wextra -pedantic -Werror
-    )
+    # target_compile_options(helloworld PRIVATE
+    #     -Wall -Wextra -pedantic -Werror
+    # )
     if(WITH_BOOST_TEST)
         target_compile_options(test_version PRIVATE
             -Wall -Wextra -pedantic -Werror

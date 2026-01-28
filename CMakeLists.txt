@@ -13,7 +13,7 @@ add_executable(lesson2 main.cpp)
 add_library(helloworld lib.cpp)
 
 set_target_properties(lesson2 helloworld PROPERTIES
-    CXX_STANDARD 14
+    CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
 

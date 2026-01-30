@@ -6,14 +6,14 @@
 #include <string>
 #include <vector>
 
-// ("",  '.') -> [""]
-// ("11", '.') -> ["11"]
-// ("..", '.') -> ["", "", ""]
-// ("11.", '.') -> ["11", ""]
-// (".11", '.') -> ["", "11"]
-// ("11.22", '.') -> ["11", "22"]
 using str_ip_t = std::vector<std::string>;
 using ip_pool_t = std::vector<str_ip_t>;
+
+std::ostream& operator<<(std::ostream& st, const str_ip_t& ip) {
+    st << ip[0] << "." << ip[1] << "." << ip[2] << "." << ip[3] << std::endl;
+
+    return st;
+}
 
 str_ip_t split(const std::string& str, char d) {
     str_ip_t r;
@@ -31,23 +31,6 @@ str_ip_t split(const std::string& str, char d) {
 
     return r;
 }
-
-// void filter(const str_ip_t& ip, int one = -1, int two = -1, int three = -1,
-//             int four = -1) {
-//     bool got_it = false;
-//     if ((one != -1 && std::stoi(ip[0])) == one ||
-//         (two != -1 && std::stoi(ip[1]) == two) ||
-//         (three != -1 && std::stoi(ip[2]) == three) ||
-//         (four != -1 && std::stoi(ip[2]))) {
-//     }
-//     for (const auto& ip_part : ip) {
-//         std::cout << ip_part;
-//         if (ip_part != ip.back()) {
-//             std::cout << ".";
-//         }
-//     }
-//     std::cout << std::endl;
-// }
 
 template <typename T>
 void filter_s(str_ip_t ip, T t, bool& res) {
@@ -67,16 +50,6 @@ void filter(str_ip_t ip, bool& res, T first, Args... args) {
     filter_s(ip, first, res);
     ip.erase(ip.begin());
     filter(ip, res, args...);
-}
-
-void print_ip(const str_ip_t& ip) {
-    for (const auto& ip_part : ip) {
-        std::cout << ip_part;
-        if (ip_part != ip.back()) {
-            std::cout << ".";
-        }
-    }
-    std::cout << std::endl;
 }
 
 template <typename T>
@@ -113,30 +86,29 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
             return weight_a > weight_b;
         };
 
-        // TODO reverse lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(), compare);
 
         for (const auto& ip : ip_pool) {
-            print_ip(ip);
+            std::cout << ip;
         }
         for (const auto& ip : ip_pool) {
             bool res = true;
             filter(ip, res, "1");
             if (res) {
-                print_ip(ip);
+                std::cout << ip;
             }
         }
         for (const auto& ip : ip_pool) {
             bool res = true;
             filter(ip, res, "46", "70");
             if (res) {
-                print_ip(ip);
+                std::cout << ip;
             }
         }
 
         for (const auto& ip : ip_pool) {
             if (filter_any(ip, "46")) {
-                print_ip(ip);
+                std::cout << ip;
             }
         }
 

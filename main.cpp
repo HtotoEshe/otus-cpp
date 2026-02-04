@@ -1,179 +1,34 @@
-#include <algorithm>
-#include <cassert>
-#include <cstdint>
-#include <cstdlib>
-#include <iostream>
-#include <string>
-#include <vector>
-
-using str_ip_t = std::vector<std::string>;
-using ip_pool_t = std::vector<str_ip_t>;
-
-std::ostream& operator<<(std::ostream& st, const str_ip_t& ip) {
-    st << ip[0] << "." << ip[1] << "." << ip[2] << "." << ip[3] << std::endl;
-
-    return st;
-}
-
-str_ip_t split(const std::string& str, char d) {
-    str_ip_t r;
-
-    std::string::size_type start = 0;
-    std::string::size_type stop = str.find_first_of(d);
-    while (stop != std::string::npos) {
-        r.push_back(str.substr(start, stop - start));
-
-        start = stop + 1;
-        stop = str.find_first_of(d, start);
-    }
-
-    r.push_back(str.substr(start));
-
-    return r;
-}
-
-template <typename T>
-void filter_s(str_ip_t ip, T t, bool& res) {
-    if (ip.empty()) {
-        return;
-    }
-    res &= (t == ip[0]);
-}
-
-template <typename T>
-void filter(str_ip_t ip, bool& res, T first) {
-    filter_s(ip, first, res);
-}
-
-template <typename T, typename... Args>
-void filter(str_ip_t ip, bool& res, T first, Args... args) {
-    filter_s(ip, first, res);
-    ip.erase(ip.begin());
-    filter(ip, res, args...);
-}
-
-template <typename T>
-bool filter_any(const str_ip_t& ip, T byte) {
-    for (const auto& ip_part : ip) {
-        if (ip_part == byte) {
-            return true;
-        }
-    }
-    return false;
-}
+#include "ip_filter.hpp"
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
     try {
-        ip_pool_t ip_pool;
+        ip_pool_t ip_pool = read_ip_pool();
 
-        for (std::string line; std::getline(std::cin, line);) {
-            std::vector<std::string> v = split(line, '\t');
-            ip_pool.push_back(split(v.at(0), '.'));
-        }
-
-        auto compare = [](const std::vector<std::string>& a,
-                          const std::vector<std::string>& b) {
-            assert(a.size() == 4 && b.size() == 4);
-            auto GetWeight = [](const str_ip_t& addr) {
-                uint64_t res = (std::stoul(addr[0]) << 24) +
-                               (std::stoul(addr[1]) << 16) +
-                               (std::stoul(addr[2]) << 8) + std::stoul(addr[3]);
-                return res;
-            };
-
-            uint32_t weight_a = GetWeight(a);
-            uint32_t weight_b = GetWeight(b);
-            return weight_a > weight_b;
-        };
-
-        std::sort(ip_pool.begin(), ip_pool.end(), compare);
+        sort_ip_pool(ip_pool);
 
         for (const auto& ip : ip_pool) {
             std::cout << ip;
         }
         for (const auto& ip : ip_pool) {
             bool res = true;
-            filter(ip, res, "1");
+            filter(ip, res, 1);
             if (res) {
                 std::cout << ip;
             }
         }
         for (const auto& ip : ip_pool) {
             bool res = true;
-            filter(ip, res, "46", "70");
+            filter(ip, res, 46, 70);
             if (res) {
                 std::cout << ip;
             }
         }
 
         for (const auto& ip : ip_pool) {
-            if (filter_any(ip, "46")) {
+            if (filter_any(ip, 46)) {
                 std::cout << ip;
             }
         }
-
-        // 222.173.235.246
-        // 222.130.177.64
-        // 222.82.198.61
-        // ...
-        // 1.70.44.170
-        // 1.29.168.152
-        // 1.1.234.8
-
-        // TODO filter by first byte and output
-        // ip = filter(1)
-
-        // 1.231.69.33
-        // 1.87.203.225
-        // 1.70.44.170
-        // 1.29.168.152
-        // 1.1.234.8
-
-        // TODO filter by first and second bytes and output
-        // ip = filter(46, 70)
-
-        // 46.70.225.39
-        // 46.70.147.26
-        // 46.70.113.73
-        // 46.70.29.76
-
-        // TODO filter by any byte and output
-        // ip = filter_any(46)
-
-        // 186.204.34.46
-        // 186.46.222.194
-        // 185.46.87.231
-        // 185.46.86.132
-        // 185.46.86.131
-        // 185.46.86.131
-        // 185.46.86.22
-        // 185.46.85.204
-        // 185.46.85.78
-        // 68.46.218.208
-        // 46.251.197.23
-        // 46.223.254.56
-        // 46.223.254.56
-        // 46.182.19.219
-        // 46.161.63.66
-        // 46.161.61.51
-        // 46.161.60.92
-        // 46.161.60.35
-        // 46.161.58.202
-        // 46.161.56.241
-        // 46.161.56.203
-        // 46.161.56.174
-        // 46.161.56.106
-        // 46.161.56.106
-        // 46.101.163.119
-        // 46.101.127.145
-        // 46.70.225.39
-        // 46.70.147.26
-        // 46.70.113.73
-        // 46.70.29.76
-        // 46.55.46.98
-        // 46.49.43.85
-        // 39.46.86.85
-        // 5.189.203.46
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

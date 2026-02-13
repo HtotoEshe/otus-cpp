@@ -1,37 +1,19 @@
-#include "ip_filter.hpp"
+#include <cstdint>
+#include <iostream>
+#include <list>
+#include <string>
+#include <vector>
 
-int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
-    try {
-        ip_pool_t ip_pool = read_ip_pool();
+#include "common.hpp"
 
-        sort_ip_pool(ip_pool);
-
-        for (const auto& ip : ip_pool) {
-            std::cout << ip;
-        }
-        for (const auto& ip : ip_pool) {
-            bool res = true;
-            filter(ip, res, 1);
-            if (res) {
-                std::cout << ip;
-            }
-        }
-        for (const auto& ip : ip_pool) {
-            bool res = true;
-            filter(ip, res, 46, 70);
-            if (res) {
-                std::cout << ip;
-            }
-        }
-
-        for (const auto& ip : ip_pool) {
-            if (filter_any(ip, 46)) {
-                std::cout << ip;
-            }
-        }
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+int main() {
+    print_ip(int8_t{-1});
+    print_ip(int16_t{0});
+    print_ip(int32_t{2130706433});
+    print_ip(int64_t{8875824491850138409});
+    print_ip(std::list<short>{400, 300, 200, 100});
+    print_ip(std::vector<int>{100, 200, 300, 400});
+    print_ip(std::string("Hello world"));
 
     return 0;
 }

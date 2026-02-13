@@ -18,7 +18,7 @@ if (MSVC)
     )
 else ()
     target_compile_options(ip_filter PRIVATE
-        -Wall -Wextra -pedantic -Werror
+        -Wall -Wextra -pedantic
     )
 endif()
 

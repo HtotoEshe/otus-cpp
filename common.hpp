@@ -73,6 +73,12 @@ void print_ip(T&& container, long) {
 }
 }  // namespace filter_list
 
+/*!
+    \brief Шаблоная функция печати IP адреса. Предназначена для побайтового
+   вывода передаваемого значения. Использует SFINAE
+    \param[in] container rvalue ссылка на переменную, содержащую IP адрес
+*/
+
 template <typename T>
 void print_ip(T&& container) {
     filter_list::print_ip(container, int{});

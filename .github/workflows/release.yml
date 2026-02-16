@@ -40,11 +40,11 @@ jobs:
           asset_name: print_ip-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
       # Build the HTML documentation
-      - name: Doxygen Action
-        uses: mattnotmitt/doxygen-action@v1.1.0
-        with:
-            doxyfile-path: ./Doxyfile
-            working-directory: .
+      # - name: Doxygen Action
+      #   uses: mattnotmitt/doxygen-action@v1.1.0
+      #   with:
+      #       doxyfile-path: ./Doxyfile
+      #       working-directory: .
       # Deploy the HTML documentation to GitHub Pages
       - name: GH Pages Deployment
         uses: peaceiris/actions-gh-pages@v3

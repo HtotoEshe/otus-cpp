@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OTIS Professional, lesson 04: Файл common.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">OTIS Professional, lesson 04<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Templated function of IP printing, using SFINAE</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл common.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для common.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="common_8hpp__incl.png" border="0" usemap="#acommon_8hpp" alt=""/></div>
+<map name="acommon_8hpp" id="acommon_8hpp">
+<area shape="rect" title=" " alt="" coords="156,5,251,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,66,105"/>
+<area shape="poly" title=" " alt="" coords="176,34,79,75,77,70,174,29"/>
+<area shape="rect" title=" " alt="" coords="89,79,160,105"/>
+<area shape="poly" title=" " alt="" coords="192,34,151,70,148,66,188,30"/>
+<area shape="rect" title=" " alt="" coords="184,79,223,105"/>
+<area shape="poly" title=" " alt="" coords="206,31,206,63,201,63,201,31"/>
+<area shape="rect" title=" " alt="" coords="246,79,300,105"/>
+<area shape="poly" title=" " alt="" coords="217,29,253,66,249,70,213,33"/>
+<area shape="rect" title=" " alt="" coords="324,79,382,105"/>
+<area shape="poly" title=" " alt="" coords="230,29,315,70,313,74,228,34"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="common_8hpp__dep__incl.png" border="0" usemap="#acommon_8hppdep" alt=""/></div>
+<map name="acommon_8hppdep" id="acommon_8hppdep">
+<area shape="rect" title=" " alt="" coords="5,5,101,31"/>
+<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="16,79,90,105"/>
+<area shape="poly" title=" " alt="" coords="56,46,56,79,50,79,50,46"/>
+</map>
+</div>
+</div>
+<p><a href="common_8hpp_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefilter__vector.html">filter_vector</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefilter__string.html">filter_string</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefilter__list.html">filter_list</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:af1652e7fef38d6f12b8dd9e9d008f267" id="r_af1652e7fef38d6f12b8dd9e9d008f267"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:af1652e7fef38d6f12b8dd9e9d008f267"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#af1652e7fef38d6f12b8dd9e9d008f267">print_val</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:af1652e7fef38d6f12b8dd9e9d008f267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f36de3ede5436e83721845c63205c3d" id="r_a0f36de3ede5436e83721845c63205c3d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a0f36de3ede5436e83721845c63205c3d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a0f36de3ede5436e83721845c63205c3d">print_container</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a0f36de3ede5436e83721845c63205c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64ecccabbd3a19a2968d2a885740243a" id="r_a64ecccabbd3a19a2968d2a885740243a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a64ecccabbd3a19a2968d2a885740243a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a64ecccabbd3a19a2968d2a885740243a">print_string</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a64ecccabbd3a19a2968d2a885740243a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad230db4475ed51e9d0b3daffa0d40203" id="r_ad230db4475ed51e9d0b3daffa0d40203"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ad230db4475ed51e9d0b3daffa0d40203"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacefilter__vector.html#ad230db4475ed51e9d0b3daffa0d40203">filter_vector::print_ip</a> (T &amp;&amp;container, int) -&gt; decltype(container.size())</td></tr>
+<tr class="separator:ad230db4475ed51e9d0b3daffa0d40203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7162db05ccde1aba27f4748a8068f5a3" id="r_a7162db05ccde1aba27f4748a8068f5a3"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a7162db05ccde1aba27f4748a8068f5a3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacefilter__vector.html#a7162db05ccde1aba27f4748a8068f5a3">filter_vector::print_ip</a> (T &amp;&amp;container, long)</td></tr>
+<tr class="separator:a7162db05ccde1aba27f4748a8068f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf578c45aee2524369ea4d765b55dc2e" id="r_acf578c45aee2524369ea4d765b55dc2e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:acf578c45aee2524369ea4d765b55dc2e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacefilter__string.html#acf578c45aee2524369ea4d765b55dc2e">filter_string::print_ip</a> (T &amp;&amp;container, int) -&gt; decltype(container.c_str())</td></tr>
+<tr class="separator:acf578c45aee2524369ea4d765b55dc2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa8fa8e2df6d8fb423e8a73af7265d1" id="r_a0fa8fa8e2df6d8fb423e8a73af7265d1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a0fa8fa8e2df6d8fb423e8a73af7265d1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacefilter__string.html#a0fa8fa8e2df6d8fb423e8a73af7265d1">filter_string::print_ip</a> (T &amp;&amp;container, long)</td></tr>
+<tr class="separator:a0fa8fa8e2df6d8fb423e8a73af7265d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739dc30ba3a6cb3d5f48ec7cabd141c5" id="r_a739dc30ba3a6cb3d5f48ec7cabd141c5"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a739dc30ba3a6cb3d5f48ec7cabd141c5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacefilter__list.html#a739dc30ba3a6cb3d5f48ec7cabd141c5">filter_list::print_ip</a> (T &amp;&amp;container, int) -&gt; decltype(container.sort())</td></tr>
+<tr class="separator:a739dc30ba3a6cb3d5f48ec7cabd141c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace765d98524493567c86f92acbf274b9" id="r_ace765d98524493567c86f92acbf274b9"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ace765d98524493567c86f92acbf274b9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacefilter__list.html#ace765d98524493567c86f92acbf274b9">filter_list::print_ip</a> (T &amp;&amp;container, long)</td></tr>
+<tr class="separator:ace765d98524493567c86f92acbf274b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae027f9943fa30cbbf6d05b30184cd3f" id="r_aae027f9943fa30cbbf6d05b30184cd3f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:aae027f9943fa30cbbf6d05b30184cd3f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aae027f9943fa30cbbf6d05b30184cd3f">print_ip</a> (T &amp;&amp;container)</td></tr>
+<tr class="memdesc:aae027f9943fa30cbbf6d05b30184cd3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Шаблоная функция печати IP адреса. Предназначена для побайтового вывода передаваемого значения. Использует SFINAE.  <br /></td></tr>
+<tr class="separator:aae027f9943fa30cbbf6d05b30184cd3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Функции</h2>
+<a id="a0f36de3ede5436e83721845c63205c3d" name="a0f36de3ede5436e83721845c63205c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f36de3ede5436e83721845c63205c3d">&#9670;&#160;</a></span>print_container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_container </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae027f9943fa30cbbf6d05b30184cd3f" name="aae027f9943fa30cbbf6d05b30184cd3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae027f9943fa30cbbf6d05b30184cd3f">&#9670;&#160;</a></span>print_ip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_ip </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>container</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Шаблоная функция печати IP адреса. Предназначена для побайтового вывода передаваемого значения. Использует SFINAE. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">container</td><td>rvalue ссылка на переменную, содержащую IP адрес </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a64ecccabbd3a19a2968d2a885740243a" name="a64ecccabbd3a19a2968d2a885740243a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64ecccabbd3a19a2968d2a885740243a">&#9670;&#160;</a></span>print_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_string </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1652e7fef38d6f12b8dd9e9d008f267" name="af1652e7fef38d6f12b8dd9e9d008f267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1652e7fef38d6f12b8dd9e9d008f267">&#9670;&#160;</a></span>print_val()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_val </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

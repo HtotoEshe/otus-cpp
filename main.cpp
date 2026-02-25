@@ -1,37 +1,36 @@
-#include "ip_filter.hpp"
+#include <cstddef>
+#include <iostream>
+#include <list>
+#include <map>
+#include <memory>
+#include <type_traits>
+#include <typeinfo>
+#include <vector>
 
-int main([[maybe_unused]] int argc, [[maybe_unused]] char const* argv[]) {
-    try {
-        ip_pool_t ip_pool = read_ip_pool();
+#include "my_allocator.hpp"
 
-        sort_ip_pool(ip_pool);
+int main() {
+    using namespace common;
 
-        for (const auto& ip : ip_pool) {
-            std::cout << ip;
-        }
-        for (const auto& ip : ip_pool) {
-            bool res = true;
-            filter(ip, res, 1);
-            if (res) {
-                std::cout << ip;
-            }
-        }
-        for (const auto& ip : ip_pool) {
-            bool res = true;
-            filter(ip, res, 46, 70);
-            if (res) {
-                std::cout << ip;
-            }
-        }
+    // 1. Создание и заполнение std::map<int, int>
+    std::map<int, int> standard_map;
+    fill_std_map(standard_map);
+    print_map(standard_map, "std::map (стандартный аллокатор)");
 
-        for (const auto& ip : ip_pool) {
-            if (filter_any(ip, 46)) {
-                std::cout << ip;
-            }
-        }
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    // 2. Создание и заполнение std::map с нашим аллокатором
+    using CustomMapAlloc = allocator<std::pair<const int, int>, 10>;
+    std::map<int, int, std::less<int>, CustomMapAlloc> custom_map;
+    fill_custom_map(custom_map);
+    print_map(custom_map, "std::map (наш аллокатор, 10 элементов)");
 
-    return 0;
+    // 4. Создание и заполнение нашего контейнера
+    MyContainer<int> my_container;
+    fill_my_container(my_container);
+    print_container(my_container, "MyContainer (стандартный аллокатор)");
+
+    // 5. Создание и заполнение нашего контейнера с нашим аллокатором
+    MyContainer<int, allocator<int, 10>> my_container_with_alloc;
+    fill_my_container_with_alloc(my_container_with_alloc);
+    print_container(my_container_with_alloc,
+                    "MyContainer (наш аллокатор, 10 элементов)");
 }
